@@ -11,8 +11,9 @@ env:
   TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  AUTH_SECRET: ${{secrets.AUTH_SECRET}}
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  NEXTAUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+  NEXTAUTH_URL: http://localhost:3000
 
 jobs:
   # Job 1: Linting & Service + Component Tests
@@ -60,11 +61,6 @@ jobs:
 
       - name: Build Next.js app
         run: npm run build
-        env:
-          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          NEXTAUTH_URL: http://localhost:3000
-          NEXTAUTH_SECRET: ${{secrets.AUTH_SECRET}}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
