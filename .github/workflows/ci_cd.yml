@@ -64,6 +64,7 @@ jobs:
           TMDB_API_KEY: ${{ env.TMDB_API_KEY }}
           AUTH_SECRET: ${{ env.AUTH_SECRET }}
           NEXTAUTH_URL: http://localhost:3000
+          NEXTAUTH_SECRET: ${{env.AUTH_SECRET}}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
