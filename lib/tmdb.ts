@@ -4,7 +4,7 @@ const BASE_URL = "https://api.themoviedb.org/3"
 // Generic fetcher from TMDB with API key + caching ( to be used in API routes)
 export async function fetchFromTMDB(
   endpoint: string,
-  params: Record<string, any> = {}
+  params: Record<string, string> = {}
 ) {
   const url = new URL(`${BASE_URL}${endpoint}`)
   url.searchParams.set("api_key", API_KEY)

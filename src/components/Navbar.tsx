@@ -3,6 +3,7 @@ import { Button, Avatar, Menu } from "@mantine/core"
 import { useState } from "react"
 import { useSession, signOut } from "next-auth/react"
 import SignInModal from "./SignInModal"
+import Image from "next/image"
 
 export default function Navbar() {
   const [opened, setOpened] = useState<boolean>(false)
@@ -12,7 +13,7 @@ export default function Navbar() {
     <div className="sticky top-0 left-0 right-0 w-full z-20 flex justify-between items-center px-6 md:px-12 py-4 backdrop-blur-xl">
       {/* Logo */}
       <Link href="/" passHref>
-        <img src="/logo.png" alt="Logo" className=" h-[24px] lg:h-[36px]" />
+        <Image src="/logo.png" alt="Logo" width={250} height={48} />
       </Link>
 
       {/* Right side */}

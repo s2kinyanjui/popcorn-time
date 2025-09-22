@@ -24,7 +24,11 @@ export default async function handler(
     // Cache for 5 minutes
     res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate")
     res.status(200).json(data)
-  } catch (error: any) {
-    res.status(500).json({ error: error.message })
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message })
+    } else {
+      res.status(500).json({ error: "An unexpected error occurred" })
+    }
   }
 }

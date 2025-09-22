@@ -1,6 +1,7 @@
 // pages/api/popular-movies.ts
 import type { NextApiRequest, NextApiResponse } from "next"
 import { fetchFromTMDB } from "../../../lib/tmdb"
+import { TMDBMovie } from "types/tmdb"
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,11 +10,11 @@ export default async function handler(
   try {
     const data = await fetchFromTMDB("/movie/popular", {
       language: "en-US",
-      page: 1,
+      page: "1",
     })
 
     // Transform movies response to fit UI needs
-    const moviesTransformed = data.results.map((m: any) => ({
+    const moviesTransformed = data.results.map((m: TMDBMovie) => ({
       background_url: m.backdrop_path
         ? `https://image.tmdb.org/t/p/original${m.backdrop_path}`
         : null,
@@ -28,7 +29,11 @@ export default async function handler(
     res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300")
 
     res.status(200).json(moviesTransformed)
-  } catch (err: any) {
-    res.status(500).json({ error: err.message })
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message })
+    } else {
+      res.status(500).json({ error: "An unexpected error occurred" })
+    }
   }
 }
