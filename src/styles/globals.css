@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "EudoxusSans";
+  src: url("/fonts/EudoxusSans-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EudoxusSans";
+  src: url("/fonts/EudoxusSans-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EudoxusSans";
+  src: url("/fonts/EudoxusSans-Light.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/Oswald.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body {
+  font-family: "EudoxusSans", sans-serif;
+  font-weight: normal;
+}
+
+p {
+  font-size: 0.8rem;
+}
