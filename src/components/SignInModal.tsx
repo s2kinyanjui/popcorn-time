@@ -2,6 +2,7 @@ import { Modal, TextInput, PasswordInput, Button } from "@mantine/core"
 import React, { useState } from "react"
 import { signIn } from "next-auth/react"
 import * as yup from "yup"
+import Image from "next/image"
 
 // Validation schema for email and password
 const schema = yup.object().shape({
@@ -50,14 +51,16 @@ export default function SignInModal({ opened, onClose }: SignInModalProps) {
       } else {
         alert("Invalid credentials")
       }
-    } catch (err: any) {
-      // Collect validation errors
-      if (err.inner) {
+    } catch (err: unknown) {
+      // Validation errors
+      if (err instanceof yup.ValidationError) {
         const formErrors: { email?: string; password?: string } = {}
         err.inner.forEach((e: yup.ValidationError) => {
           if (e.path) formErrors[e.path as "email" | "password"] = e.message
         })
         setErrors(formErrors)
+      } else {
+        console.error("Unexpected error during login:", err)
       }
     }
   }
@@ -73,7 +76,7 @@ export default function SignInModal({ opened, onClose }: SignInModalProps) {
       }}
     >
       {/* Logo */}
-      <img src="/logo.png" alt="Logo" className="h-[24px] lg:h-[36px]" />
+      <Image src="/logo.png" alt="Logo" width={250} height={48} />
 
       {/* Header */}
       <div>

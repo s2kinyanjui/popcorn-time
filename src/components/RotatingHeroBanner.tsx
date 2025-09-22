@@ -88,9 +88,9 @@ export default function RotatingHeroBanner({
           </div>
 
           {/* description */}
-          <p className="text-gray-200 leading-relaxed mb-6 line-clamp-3">
+          <span className="text-gray-200 block leading-relaxed mb-6 line-clamp-3 lg:text-[1.2rem]">
             {movie.description}
-          </p>
+          </span>
         </motion.div>
       </div>
     </section>

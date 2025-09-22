@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar"
 import MovieDetails from "@/components/MovieDetails"
 
 import { Loader } from "@mantine/core"
-import { TMDBMovieDetail } from "../../../types/tmdb"
+import { TMDBCast, TMDBCrew, TMDBMovieDetail } from "../../../types/tmdb"
 import { getMovieById } from "../../../lib/services"
 
 function Movie() {
@@ -57,10 +57,10 @@ function Movie() {
         votes={movie.vote_count}
         releaseDate={movie.release_date}
         runtime={`${movie.runtime} min`}
-        genres={movie.genres.map((g: any) => g.name)}
+        genres={movie.genres.map((g) => g.name)}
         overview={movie.overview}
         poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        cast={movie.credits.cast.slice(0, 10).map((actor: any) => ({
+        cast={movie.credits.cast.slice(0, 10).map((actor: TMDBCast) => ({
           id: actor.id,
           name: actor.name,
           role: actor.character,
@@ -68,7 +68,7 @@ function Movie() {
             ? `https://image.tmdb.org/t/p/w300${actor.profile_path}`
             : "/placeholder.jpg",
         }))}
-        crew={movie.credits.crew.slice(0, 10).map((member: any) => ({
+        crew={movie.credits.crew.slice(0, 10).map((member: TMDBCrew) => ({
           id: member.id,
           name: member.name,
           role: member.job,
