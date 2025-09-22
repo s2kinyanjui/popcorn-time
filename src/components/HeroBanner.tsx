@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import RotatingHeroBanner from "./RotatingHeroBanner"
+import { TMDBPopularMovie } from "../../types/tmdb"
 
 export default function HeroBannerContainer() {
-  const [movies, setMovies] = useState<[]>([])
+  const [movies, setMovies] = useState<TMDBPopularMovie[]>([])
   const [loading, setLoading] = useState(true)
 
   // Fetch popular movies on mount
