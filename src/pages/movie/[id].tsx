@@ -5,6 +5,7 @@ import MovieDetails from "@/components/MovieDetails"
 
 import { Loader } from "@mantine/core"
 import { TMDBMovieDetail } from "../../../types/tmdb"
+import { getMovieById } from "../../../lib/services"
 
 function Movie() {
   const router = useRouter()
@@ -19,6 +20,14 @@ function Movie() {
 
     async function fetchMovie() {
       // Fetch movie and add it to movie state
+      try {
+        const data = await getMovieById(id as string)
+        setMovie(data)
+      } catch (err) {
+        console.error("Failed to load movie:", err)
+      } finally {
+        setLoading(false)
+      }
     }
 
     fetchMovie()

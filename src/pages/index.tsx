@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react"
 import HeroBannerContainer from "@/components/HeroBanner"
 
 import { TMDBMovie } from "../../types/tmdb"
+import { getMovies } from "../../lib/services"
 
 function Home() {
   const [query, setQuery] = useState<string>("")
@@ -25,6 +26,18 @@ function Home() {
   useEffect(() => {
     const fetchMovies = async () => {
       // Fetch movies and put them in movies state array
+      try {
+        const data = await getMovies({
+          page,
+          query: debouncedQuery,
+        })
+        setMovies(data.results)
+        setTotalPages(data.total_pages)
+      } catch (error) {
+        console.error("Failed to fetch movies:", error)
+      } finally {
+        setLoading(false)
+      }
     }
 
     fetchMovies()

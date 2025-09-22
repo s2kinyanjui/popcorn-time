@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import RotatingHeroBanner from "./RotatingHeroBanner"
 import { TMDBPopularMovie } from "../../types/tmdb"
+import { getPopularMovies } from "../../lib/services"
 
 export default function HeroBannerContainer() {
   const [movies, setMovies] = useState<TMDBPopularMovie[]>([])
@@ -10,6 +11,14 @@ export default function HeroBannerContainer() {
   useEffect(() => {
     async function fetchMovies() {
       // Fetch movies and add them to movies state array
+      try {
+        const data = await getPopularMovies()
+        setMovies(data)
+      } catch (err) {
+        console.error("Error fetching movies:", err)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchMovies()
   }, [])
