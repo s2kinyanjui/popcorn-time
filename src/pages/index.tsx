@@ -51,7 +51,9 @@ function Home() {
 
       <div className="px-6 md:px-12 py-8">
         <div className="flex w-full justify-end mb-4">
-          <SearchBar onSearch={setQuery} />
+          <div className="w-full sm:w-auto">
+            <SearchBar onSearch={setQuery} />
+          </div>
         </div>
 
         {debouncedQuery.trim() && <SearchHeader query={debouncedQuery} />}

@@ -8,8 +8,9 @@ export default function SearchBar({
 }) {
   return (
     <Input
+      variant="filled"
       leftSection={<IconSearch size={18} stroke={1.5} />}
-      placeholder="Search"
+      placeholder="Search movie"
       onChange={(e) => onSearch(e.currentTarget.value)}
       radius="md"
       size="sm"
